@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Корзина — E-Shelf</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { brand: '#732128', dark: '#2e0303', blush: '#eadcdc', cream: '#f6f2f2', line: '#d5b4b4', ink: '#1a1a1a', muted: '#555', ok: '#47864d' },
+      keyframes: { 'fade-up': { from: { opacity: '0', transform: 'translateY(30px)' }, to: { opacity: '1', transform: 'translateY(0)' } } },
+      fontFamily: { sans: ['Arial', 'sans-serif'], serif: ['Georgia', 'serif'] } } } };
+  </script>
+  <style type="text/tailwindcss">
+    @layer base { h1, h2, h3 { @apply font-serif font-bold leading-snug text-ink; } }
+  </style>
+</head>
+<body class="bg-cream font-sans leading-relaxed text-ink">
+  <header class="sticky top-0 z-50 border-b border-line bg-cream">
+    <div class="max-w-6xl mx-auto px-4 flex flex-wrap items-center justify-between py-4 lg:grid lg:grid-cols-[auto_1fr_auto] lg:gap-6">
+      <a href="index.html" class="font-serif text-2xl font-bold text-brand hover:text-dark">E-Shelf</a>
+      <button id="burger" class="rounded-lg p-2 hover:bg-blush lg:hidden" aria-label="Меню" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 hidden"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <!-- на мобильных: сворачиваемая панель (grid-rows 0fr -> 1fr), с lg: контент встаёт в 3 колонки шапки -->
+      <div id="menu" class="grid w-full grid-rows-[0fr] transition-all duration-300 data-[open]:grid-rows-[1fr] lg:contents">
+        <div class="overflow-hidden lg:contents">
+          <nav class="py-4 lg:justify-self-center lg:py-0"><ul class="flex flex-col gap-3 lg:flex-row lg:gap-5 xl:gap-8"><li><a href="index.html" class="block border-b-2 py-1 font-medium transition hover:border-brand hover:text-brand border-transparent">Главная</a></li><li><a href="search.html" class="block border-b-2 py-1 font-medium transition hover:border-brand hover:text-brand border-transparent">Поиск</a></li><li><a href="free.html" class="block border-b-2 py-1 font-medium transition hover:border-brand hover:text-brand border-transparent">Бесплатные</a></li><li><a href="blog.html" class="block border-b-2 py-1 font-medium transition hover:border-brand hover:text-brand border-transparent">Блог</a></li><li><a href="cart.html" class="block border-b-2 py-1 font-medium transition hover:border-brand hover:text-brand border-brand text-brand">Корзина</a></li></ul></nav>
+          <div class="flex flex-col gap-3 pb-2 sm:flex-row lg:justify-self-end lg:pb-0">
+            <a href="stub.html" class="inline-flex items-center justify-center gap-2 font-semibold border rounded-lg px-5 py-1.5 transition border-line text-brand hover:bg-brand hover:text-white !px-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM3 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 019.374 21c-2.331 0-4.512-.645-6.374-1.766z"/></svg>Регистрация</a>
+            <a href="stub.html" class="inline-flex items-center justify-center gap-2 font-semibold border rounded-lg px-5 py-1.5 transition border-brand bg-brand text-white hover:bg-dark hover:border-dark !px-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"/></svg>Авторизация</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="py-16">
+      <div class="max-w-6xl mx-auto px-4 grid items-start gap-8 lg:grid-cols-[1fr_20rem]">
+        <div class="flex flex-col gap-4" id="cartList">
+          <div class="border-b border-line py-2">
+            <label class="inline-flex cursor-pointer items-center gap-2"><input type="checkbox" id="selectAll" class="size-4 accent-brand" checked><span>Выбрать все</span></label>
+          </div>
+          <article class="cart-item grid grid-cols-[auto_4rem_1fr_auto] items-center gap-x-3 gap-y-1 rounded-lg bg-white p-4 shadow transition hover:shadow-lg sm:grid-cols-[auto_5rem_1fr_auto_auto] sm:gap-4" data-price="8.80">
+            <input type="checkbox" class="cart-item__checkbox row-span-2 size-4 cursor-pointer accent-brand sm:row-span-1" checked>
+            <img src="img/book-dune.jpg" alt="Дюна" class="row-span-2 aspect-[2/3] w-full rounded object-cover sm:row-span-1">
+            <div><h3 class="font-semibold">Дюна</h3><p class="text-sm text-muted">Фрэнк Герберт</p></div>
+            <p class="col-start-3 font-bold text-brand sm:col-start-auto sm:justify-self-end">8.80 BYN</p>
+            <button class="cart-item__remove col-start-4 row-start-1 size-8 rounded text-muted transition hover:bg-red-100 hover:text-red-700 sm:col-start-auto sm:row-start-auto" aria-label="Удалить">✕</button>
+          </article>
+          <article class="cart-item grid grid-cols-[auto_4rem_1fr_auto] items-center gap-x-3 gap-y-1 rounded-lg bg-white p-4 shadow transition hover:shadow-lg sm:grid-cols-[auto_5rem_1fr_auto_auto] sm:gap-4" data-price="10.90">
+            <input type="checkbox" class="cart-item__checkbox row-span-2 size-4 cursor-pointer accent-brand sm:row-span-1" checked>
+            <img src="img/book-got.jpg" alt="Игра престолов" class="row-span-2 aspect-[2/3] w-full rounded object-cover sm:row-span-1">
+            <div><h3 class="font-semibold">Игра престолов</h3><p class="text-sm text-muted">Дж. Мартин</p></div>
+            <p class="col-start-3 font-bold text-brand sm:col-start-auto sm:justify-self-end">10.90 BYN</p>
+            <button class="cart-item__remove col-start-4 row-start-1 size-8 rounded text-muted transition hover:bg-red-100 hover:text-red-700 sm:col-start-auto sm:row-start-auto" aria-label="Удалить">✕</button>
+          </article>
+          <article class="cart-item grid grid-cols-[auto_4rem_1fr_auto] items-center gap-x-3 gap-y-1 rounded-lg bg-white p-4 shadow transition hover:shadow-lg sm:grid-cols-[auto_5rem_1fr_auto_auto] sm:gap-4" data-price="6.40">
+            <input type="checkbox" class="cart-item__checkbox row-span-2 size-4 cursor-pointer accent-brand sm:row-span-1">
+            <img src="img/book-sapiens.jpg" alt="Sapiens" class="row-span-2 aspect-[2/3] w-full rounded object-cover sm:row-span-1">
+            <div><h3 class="font-semibold">Sapiens. Краткая история человечества</h3><p class="text-sm text-muted">Ю. Н. Харари</p></div>
+            <p class="col-start-3 font-bold text-brand sm:col-start-auto sm:justify-self-end">6.40 BYN</p>
+            <button class="cart-item__remove col-start-4 row-start-1 size-8 rounded text-muted transition hover:bg-red-100 hover:text-red-700 sm:col-start-auto sm:row-start-auto" aria-label="Удалить">✕</button>
+          </article>
+          <article class="cart-item grid grid-cols-[auto_4rem_1fr_auto] items-center gap-x-3 gap-y-1 rounded-lg bg-white p-4 shadow transition hover:shadow-lg sm:grid-cols-[auto_5rem_1fr_auto_auto] sm:gap-4" data-price="0">
+            <input type="checkbox" class="cart-item__checkbox row-span-2 size-4 cursor-pointer accent-brand sm:row-span-1" checked>
+            <img src="img/book-christie.jpg" alt="Murder on the Orient Express" class="row-span-2 aspect-[2/3] w-full rounded object-cover sm:row-span-1">
+            <div><h3 class="font-semibold">Murder on the Orient Express</h3><p class="text-sm text-muted">Agatha Christie</p></div>
+            <p class="col-start-3 font-bold text-sm uppercase text-ok sm:col-start-auto sm:justify-self-end">Бесплатно</p>
+            <button class="cart-item__remove col-start-4 row-start-1 size-8 rounded text-muted transition hover:bg-red-100 hover:text-red-700 sm:col-start-auto sm:row-start-auto" aria-label="Удалить">✕</button>
+          </article>
+        </div>
+        <aside class="flex flex-col gap-4 rounded-lg bg-white p-8 shadow lg:mt-14">
+          <h2 class="border-b border-line pb-2 text-xl">Итого</h2>
+          <div class="flex justify-between text-muted"><span>Выбрано</span><span id="cartCount">3 книги</span></div>
+          <div class="flex items-baseline justify-between border-t border-line pt-2 text-lg"><span>Сумма</span><span id="cartTotal" class="text-xl font-bold text-brand">26.10 BYN</span></div>
+          <button class="inline-flex items-center justify-center gap-2 font-semibold border rounded-lg px-5 py-1.5 transition border-brand bg-brand text-white hover:bg-dark hover:border-dark mt-2 w-full !py-3">Перейти к оформлению</button>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/menu.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>

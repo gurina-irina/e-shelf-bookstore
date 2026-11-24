@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Shelf — главная</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { brand: '#732128', dark: '#2e0303', blush: '#eadcdc', cream: '#f6f2f2', line: '#d5b4b4', ink: '#1a1a1a', muted: '#555', ok: '#47864d' },
+      keyframes: { 'fade-up': { from: { opacity: '0', transform: 'translateY(30px)' }, to: { opacity: '1', transform: 'translateY(0)' } } },
+      fontFamily: { sans: ['Arial', 'sans-serif'], serif: ['Georgia', 'serif'] } } } };
+  </script>
+  <style type="text/tailwindcss">
+    @layer base { h1, h2, h3 { @apply font-serif font-bold leading-snug text-ink; } }
+  </style>
+</head>
+<body class="bg-cream font-sans leading-relaxed text-ink">
+  <header class="sticky top-0 z-50 border-b border-line bg-cream">
+    <div class="max-w-6xl mx-auto px-4 flex flex-wrap items-center justify-between py-4 lg:grid lg:grid-cols-[auto_1fr_auto] lg:gap-6">
+      <a href="index.html" class="font-serif text-2xl font-bold text-brand hover:text-dark">E-Shelf</a>
+      <button id="burger" class="rounded-lg p-2 hover:bg-blush lg:hidden" aria-label="Меню" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 hidden"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <!-- на мобильных: сворачиваемая панель (grid-rows 0fr -> 1fr), с lg: контент встаёт в 3 колонки шапки -->
+      <div id="menu" class="grid w-full grid-rows-[0fr] transition-all duration-300 data-[open]:grid-rows-[1fr] lg:contents">
+        <div class="overflow-hidden lg:contents">
+          <nav class="py-4 lg:justify-self-center lg:py-0"><ul class="flex flex-col gap-3 lg:flex-row lg:gap-5 xl:gap-8"><li><a href="index.html" class="block border-b-2 py-1 font-medium transition hover:border-brand hover:text-brand border-brand text-brand">Главная</a></li><li><a href="search.html" class="block border-b-2 py-1 font-medium transition hover:border-brand hover:text-brand border-transparent">Поиск</a></li><li><a href="free.html" class="block border-b-2 py-1 font-medium transition hover:border-brand hover:text-brand border-transparent">Бесплатные</a></li><li><a href="blog.html" class="block border-b-2 py-1 font-medium transition hover:border-brand hover:text-brand border-transparent">Блог</a></li><li><a href="cart.html" class="block border-b-2 py-1 font-medium transition hover:border-brand hover:text-brand border-transparent">Корзина</a></li></ul></nav>
+          <div class="flex flex-col gap-3 pb-2 sm:flex-row lg:justify-self-end lg:pb-0">
+            <a href="stub.html" class="inline-flex items-center justify-center gap-2 font-semibold border rounded-lg px-5 py-1.5 transition border-line text-brand hover:bg-brand hover:text-white !px-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM3 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 019.374 21c-2.331 0-4.512-.645-6.374-1.766z"/></svg>Регистрация</a>
+            <a href="stub.html" class="inline-flex items-center justify-center gap-2 font-semibold border rounded-lg px-5 py-1.5 transition border-brand bg-brand text-white hover:bg-dark hover:border-dark !px-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"/></svg>Авторизация</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="bg-blush py-4">
+      <div class="max-w-6xl mx-auto px-4 grid items-center gap-8 md:grid-cols-2">
+        <img src="img/books.JPG" alt="Книги и мишка" class="mx-auto h-auto max-w-full">
+        <div class="flex flex-col gap-8">
+          <h2 class="text-3xl">Присоединяйтесь, чтобы получить доступ к лучшим бесплатным книгам</h2>
+          <form action="#" class="flex max-w-md flex-col gap-2 rounded-2xl bg-white p-2 shadow focus-within:ring-4 focus-within:ring-brand/25 sm:flex-row sm:items-center sm:rounded-full">
+            <input type="email" placeholder="Введите ваш email..." required class="min-w-0 flex-1 bg-transparent px-5 py-3 outline-none placeholder:text-ink/50">
+            <button type="submit" class="inline-flex items-center justify-center gap-2 font-semibold border rounded-lg px-5 py-1.5 transition border-brand bg-brand text-white hover:bg-dark hover:border-dark !rounded-full !px-6 !py-3">Начать</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="mb-8 text-3xl text-center">Бестселлеры</h2>
+    <div id="carousel" class="relative">
+      <!-- Стрелка "Назад" -->
+      <button id="prev" class="absolute top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-2 shadow transition hover:bg-brand hover:text-white left-4 lg:-left-16" aria-label="Назад">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+        </svg>
+      </button>
+      
+      <div class="w-full overflow-hidden">
+        <!-- Пустой трек, JS сам вставит карточки -->
+        <div id="track" class="flex transition-transform duration-500 ease-out"></div>
+      </div>
+
+      <!-- Стрелка "Вперёд" -->
+      <button id="next" class="absolute top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-2 shadow transition hover:bg-brand hover:text-white right-4 lg:-right-16" aria-label="Вперёд">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mt-8 flex justify-end">
+      <a href="search.html" class="inline-flex items-center justify-center gap-2 font-semibold border rounded-lg px-5 py-1.5 transition border-brand bg-brand text-white hover:bg-dark hover:border-dark">Больше</a>
+    </div>
+  </div>
+</section>
+
+    <section class="bg-blush py-16">
+      <div class="max-w-6xl mx-auto px-4 flex flex-col gap-4 text-center">
+        <h2 class="text-3xl">О нас</h2>
+        <p class="mx-auto max-w-2xl text-lg">E-Shelf — это магазин электронных книг, где вы найдёте тысячи произведений — от классики до современной прозы. Мы собираем лучшие книги в удобных форматах и делаем чтение доступным для каждого.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/carousel.js"></script>
+</body>
+</html>
